@@ -111,10 +111,7 @@ async function displayToDom() {
     
     
 }
-// displayToDom();
 
-// let temperature = document.querySelector("#temperature");
-// temperature.textContent = weather.current_weather
 
 // form functionality
 btn.addEventListener('click', displayToDom)

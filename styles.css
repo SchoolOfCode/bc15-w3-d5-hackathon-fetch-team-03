@@ -11,6 +11,11 @@ body {
     height: 80vh;
 }
 
+h2 {
+    color:  #5c4a58;
+    font-weight: bold;
+    font-size: 2rem;
+}
 p {
     display: inline-block;
 }
@@ -18,15 +23,18 @@ p {
 #btn {
     display: inline-block;
     border: none;
-    padding: 0.4rem;
+    padding: 0.8rem 1rem;
     border-radius: 0.3rem;
     font-weight:bold;
     cursor: pointer;
+    background: #7c8cb0;
+    color: white;
 }
 #input {
     border: none;
-    padding: 0.4rem;
+    padding: 0.8rem;
     border-radius: 0.3rem;
+    margin-right: 0.5rem;
 }
 #weather-img{
     height: 200px;
