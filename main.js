@@ -1,5 +1,5 @@
 const locationParameters = {
-  q: "London",
+  q: "London, UK",
   format: "json",
 };
 
@@ -67,13 +67,22 @@ async function fetchWeather() {
 // Input fetched API date to the DOM
 
 async function displayToDom() {
+    // get location data from api
     const locationData = await fetchLocation();
+
+    // update teh lat and long in the weather data parameters object
     weatherParameters.latitude = locationData[0].lat;
     weatherParameters.longitude = locationData[0].lon;
+
+    // update location on screen
     document.querySelector('#location').textContent = locationData[0].display_name;
+
+    // get weather data from api
     const weather = await fetchWeather();
     console.log(weather);
     let temperature = document.querySelector("#temperature");
+
+    // update weather properties on the screen
     temperature.textContent = weather.current_weather.temperature;
 }
 displayToDom();
