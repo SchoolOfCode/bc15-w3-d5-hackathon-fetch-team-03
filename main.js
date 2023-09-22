@@ -41,9 +41,23 @@ async function fetchData() {
     const params = composeParameters(parameters);
     const data = await retrieveWeather(params);
     console.log("Weather data:", data);
+    return await data
 //   } catch (error) {
 //     console.error("Failed to retrieve weather data:", error.message);
 //   }
 }
 
-fetchData();
+
+// Input fetched API date to the DOM
+
+async function displayToDom(){
+  const weather = await fetchData()
+  console.log(weather)
+  let temperature = document.querySelector("#temperature");
+  temperature.textContent = weather.current_weather.temperature
+}
+displayToDom()
+
+
+// let temperature = document.querySelector("#temperature");
+// temperature.textContent = weather.current_weather
