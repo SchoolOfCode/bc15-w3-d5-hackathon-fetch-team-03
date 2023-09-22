@@ -40,6 +40,7 @@ p {
     height: 200px;
     border: 1px solid rgb(216, 216, 216);
     border-radius: 0.5rem;
+    box-shadow: 1px 1px 0px #cea5c4
 }
 /* hide */
 .hide {
