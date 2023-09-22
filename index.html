@@ -9,11 +9,24 @@
 <body>
     <div class="container">
         <h2>Welcome to our Weather app</h2>
+
+        <div>
+            <input type="text" placeholder="enter name of place" value="" id="input">
+            <button type="submit" id="btn">Look up</button>
+        </div>
+
+
         <p id="location"></p>
-        <p>Temperature: <span id="temperature"></span>C</p>
+    
+        <p class="hide">Temperature: <span id="temperature"></span>C</p>
+        <p class="hide">Wind Speed: <span id="windSpeed"></span></p>
+        <p class="hide">Description: <span id="description"></span></p>
+        <img class="hide" src="" alt="weather-img" id="weather-img">
     </div>
 
-
+    <script src="wmoData.js"></script>
     <script src="main.js"></script>
+    
+     <!-- onkeydown="displayToDom()" -->
 </body>
 </html>

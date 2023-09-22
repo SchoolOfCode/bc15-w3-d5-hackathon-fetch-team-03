@@ -1,3 +1,6 @@
+const btn = document.querySelector('#btn')
+const input = document.querySelector('#input')
+
 const locationParameters = {
   q: "London, UK",
   format: "json",
@@ -67,6 +70,8 @@ async function fetchWeather() {
 // Input fetched API date to the DOM
 
 async function displayToDom() {
+    console.log(input)
+    locationParameters.q = input.value
     // get location data from api
     const locationData = await fetchLocation();
 
@@ -81,11 +86,38 @@ async function displayToDom() {
     const weather = await fetchWeather();
     console.log(weather);
     let temperature = document.querySelector("#temperature");
+    let windSpeed = document.querySelector("#windSpeed");
+    let description = document.querySelector("#description");
+    let weatherImage = document.querySelector('#weather-img')
 
     // update weather properties on the screen
     temperature.textContent = weather.current_weather.temperature;
+    windSpeed.textContent = weather.current_weather.windspeed;
+    const weatherDesc = WMOData[weather.current_weather.weathercode]
+    console.log(weatherDesc)
+
+    let timeOfDay = 'night'
+    if(weather.current_weather.is_day) {
+      timeOfDay = 'day'
+    }
+    weatherImage.src = weatherDesc[timeOfDay].image
+    description.textContent = weatherDesc[timeOfDay].description;
+
+    // 
+    temperature.classList.remove('hide');
+    windSpeed.classList.remove('hide');
+    description.classList.remove('hide');
+    weatherImage.classList.remove('hide');
+    
+    
 }
-displayToDom();
+// displayToDom();
 
 // let temperature = document.querySelector("#temperature");
 // temperature.textContent = weather.current_weather
+
+// form functionality
+btn.addEventListener('click', displayToDom)
+
+
+

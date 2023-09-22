@@ -1,3 +1,8 @@
+body {
+    background-image: linear-gradient(to top, #9cb7cf, #a5b3d2, #b2afd2, #c0aacd, #cea5c4);
+    height: 100vh;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -8,4 +13,27 @@
 
 p {
     display: inline-block;
+}
+
+#btn {
+    display: inline-block;
+    border: none;
+    padding: 0.4rem;
+    border-radius: 0.3rem;
+    font-weight:bold;
+    cursor: pointer;
+}
+#input {
+    border: none;
+    padding: 0.4rem;
+    border-radius: 0.3rem;
+}
+#weather-img{
+    height: 200px;
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 0.5rem;
+}
+/* hide */
+.hide {
+    display: none;
 }
