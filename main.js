@@ -1,27 +1,29 @@
-const parameters = {
-  latitude: 25.20,
-  longitude: 55.27,
-  current_weather: "true",
-//   temperature_unit: "fahrenheit"
+const locationParameters = {
+  q: "London",
+  format: "json",
 };
 
-async function retrieveWeather(params) {
-  const url = `https://api.open-meteo.com/v1/forecast${params}`;
+const weatherParameters = {
+  latitude: 25.2,
+  longitude: 55.27,
+  current_weather: "true",
+  //   temperature_unit: "fahrenheit"
+};
 
-//   try {
-    const response = await fetch(url);
+async function retrieveDataFromApi(url, params) {
+  //   try {
+  const response = await fetch(`${url}${params}`);
 
-    if (!response.ok) {
-      console.error(`Error received: ${response.status}`);
-    }
+  if (!response.ok) {
+    console.error(`Error received: ${response.status}`);
+  }
 
-    const data = await response.json();
-    return data;
-//   } catch (error) {
-//     console.error("Error:", error.message);
-//   }
+  const data = await response.json();
+  return data;
+  //   } catch (error) {
+  //     console.error("Error:", error.message);
+  //   }
 }
-
 
 // composes a string of the format ?latitude=25.2&longitude=55.27&current_weather=true
 // from the parameters passed
@@ -35,29 +37,46 @@ function composeParameters(params) {
   return paramString;
 }
 
-// fetch the weather data
-async function fetchData() {
-//   try {
-    const params = composeParameters(parameters);
-    const data = await retrieveWeather(params);
-    console.log("Weather data:", data);
-    return await data
-//   } catch (error) {
-//     console.error("Failed to retrieve weather data:", error.message);
-//   }
+// fetch the location data
+async function fetchLocation() {
+  //   try {
+    // compose location parameters
+    const locationParams = composeParameters(locationParameters);
+    // get location data from api
+    const locationData = await retrieveDataFromApi( "https://nominatim.openstreetmap.org/search", locationParams );
+    return await locationData;
+    //   } catch (error) {
+    //     console.error("Failed to retrieve weather data:", error.message);
+    //   }
 }
 
+
+// fetch the weather data
+async function fetchWeather() {
+  //   try {
+    const weatherParams = composeParameters(weatherParameters);
+    // get weather data from api
+    const data = await retrieveDataFromApi( "https://api.open-meteo.com/v1/forecast", weatherParams );
+    // console.log("Weather data:", data);
+    return await data;
+    //   } catch (error) {
+    //     console.error("Failed to retrieve weather data:", error.message);
+    //   }
+}
 
 // Input fetched API date to the DOM
 
-async function displayToDom(){
-  const weather = await fetchData()
-  console.log(weather)
-  let temperature = document.querySelector("#temperature");
-  temperature.textContent = weather.current_weather.temperature
+async function displayToDom() {
+    const locationData = await fetchLocation();
+    weatherParameters.latitude = locationData[0].lat;
+    weatherParameters.longitude = locationData[0].lon;
+    document.querySelector('#location').textContent = locationData[0].display_name;
+    const weather = await fetchWeather();
+    console.log(weather);
+    let temperature = document.querySelector("#temperature");
+    temperature.textContent = weather.current_weather.temperature;
 }
-displayToDom()
-
+displayToDom();
 
 // let temperature = document.querySelector("#temperature");
 // temperature.textContent = weather.current_weather
