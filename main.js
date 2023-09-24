@@ -104,9 +104,9 @@ async function displayToDom() {
     description.textContent = weatherDesc[timeOfDay].description;
 
     // 
-    temperature.classList.remove('hide');
-    windSpeed.classList.remove('hide');
-    description.classList.remove('hide');
+    temperature.parentElement.classList.remove('hide');
+    windSpeed.parentElement.classList.remove('hide');
+    description.parentElement.classList.remove('hide');
     weatherImage.classList.remove('hide');
     
     
